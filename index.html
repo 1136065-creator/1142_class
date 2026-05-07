@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的相簿 - Minimalist Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #38a130;
+            --primary-dark: #2d8226;
+            --primary-light: #e8f5e7;
+            --bg-soft: #f8faf8;
+            --text-main: #2c3e2b;
+            --text-muted: #6c757d;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-main);
+            padding-top: 80px; /* Offset for fixed navbar */
+        }
+
+        /* 導覽列優化 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--primary-light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            letter-spacing: 1px;
+        }
+
+        /* 相簿網格系統 */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #fff;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(56, 161, 48, 0.15);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+            filter: brightness(0.9);
+        }
+
+        /* 純 CSS Lightbox 效果 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox:target {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 300;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--primary-dark);
+        }
+
+        /* 頁尾飾條 */
+        footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid var(--primary-light);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">我的相簿</a>
+            <div class="ms-auto">
+                <span class="text-muted small">Minimalist Design</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="row g-4">
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img01">
+                        <img src="images/photo01.jpg" alt="Photo 01" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+01'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img02">
+                        <img src="images/photo02.jpg" alt="Photo 02" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+02'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img03">
+                        <img src="images/photo03.jpg" alt="Photo 03" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+03'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img04">
+                        <img src="images/photo04.jpg" alt="Photo 04" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+04'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img05">
+                        <img src="images/photo05.jpg" alt="Photo 05" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+05'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img06">
+                        <img src="images/photo06.jpg" alt="Photo 06" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+06'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img07">
+                        <img src="images/photo07.jpg" alt="Photo 07" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+07'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img08">
+                        <img src="images/photo08.jpg" alt="Photo 08" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+08'">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="gallery-item">
+                    <a href="#img09">
+                        <img src="images/photo09.jpg" alt="Photo 09" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+09'">
+                    </a>
+                </div>
+            </div>
+             <div class="col-12 col-md-4 mx-auto">
+                <div class="gallery-item">
+                    <a href="#img10">
+                        <img src="images/photo10.jpg" alt="Photo 10" class="gallery-img" onerror="this.src='https://via.placeholder.com/600/38a130/ffffff?text=Image+10'">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="img01" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo01.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+01'"></div>
+    <div id="img02" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo02.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+02'"></div>
+    <div id="img03" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo03.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+03'"></div>
+    <div id="img04" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo04.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+04'"></div>
+    <div id="img05" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo05.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+05'"></div>
+    <div id="img06" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo06.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+06'"></div>
+    <div id="img07" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo07.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+07'"></div>
+    <div id="img08" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo08.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+08'"></div>
+    <div id="img09" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo09.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+09'"></div>
+    <div id="img10" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="images/photo10.jpg" class="lightbox-content" onerror="this.src='https://via.placeholder.com/1200x800/38a130/ffffff?text=Full+Photo+10'"></div>
+
+    <footer>
+        <p>&copy; 2024 我的相簿 - 精品極簡設計</p>
+    </footer>
+
+</body>
+</html>
